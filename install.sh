@@ -1,0 +1,3 @@
+#!/bin/bash
+
+go get -u -v github.com/labstack/echo/...
