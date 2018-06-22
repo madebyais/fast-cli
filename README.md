@@ -1,7 +1,7 @@
 FAST-CLI
 --------
 
-v0.0.1
+v0.0.2
 
 FAST-CLI is a cli for FAST serverless framework.
 

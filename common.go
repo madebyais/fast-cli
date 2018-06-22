@@ -17,7 +17,7 @@ func (p *{plugin_name}) Call(c echo.Context) error {
   return c.String(http.StatusOK, "Hello world.")
 }
 
-var Function {plugin_name}
+var {function_name} {plugin_name}
 `
 
 // GOPATH is the default go path

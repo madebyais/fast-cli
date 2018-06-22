@@ -65,6 +65,7 @@ func (c *cmds) create() {
 	filepath := fmt.Sprintf(`./%s`, filename)
 
 	data := strings.Replace(DEFAULT_FUNCTION_FILE, `{plugin_name}`, pluginName, -1)
+	data = strings.Replace(data, `{function_name}`, strings.ToTitle(pluginName), -1)
 	bytefile := []byte(data)
 	err := ioutil.WriteFile(filepath, bytefile, 0644)
 	if err != nil {
@@ -82,11 +83,12 @@ func (c *cmds) build() {
 	}
 
 	pluginName := c.args[2]
-	buildcmd := fmt.Sprintf(`./%s.so ./%s.go`, pluginName, pluginName)
+	sofile := fmt.Sprintf(`%s.so`, pluginName)
+	gofile := fmt.Sprintf(`%s.go`, pluginName)
 
-	output, err := exec.Command(`go`, `build`, `-buildmode=plugin`, `-o`, buildcmd).CombinedOutput()
+	err := exec.Command(`go`, `build`, `-buildmode=plugin`, `-o`, sofile, gofile).Run()
 	if err != nil {
-		fmt.Println(fmt.Sprint(err) + ": " + string(output))
+		fmt.Println(err.Error())
 		return
 	}
 
